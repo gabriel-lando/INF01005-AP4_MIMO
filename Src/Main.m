@@ -5,10 +5,13 @@ clear;
 close;
 clc;
 
+% carrega o package Communications pra usar as funções de encode e decode
+pkg load communications;
+
 % Constantes configuraveis 
 modulacao = 2; % Ordem de modulacao para M-PSK (2 = BPSK)
 n_t = 8; % Quantidade de antenas de transmissao (tambem representa a qtde de simbolos transmitidos)
-n_r = 8; % Quantidade de antenas de recepcao
+n_r = 4; % Quantidade de antenas de recepcao
 
 % Constantes derivadas
 num_bits = n_t;
@@ -34,7 +37,7 @@ Y = H * X_mod;
 
 % Recepcao
 disp("Gerando a inversa da matriz complexa H...");
-H_inv = inv(H);
+H_inv = pinv(H);
 
 disp("Detectando os simbolos recebidos...");
 X_r = H_inv * Y;
